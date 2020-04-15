@@ -48,6 +48,7 @@
   height: 50px;
   overflow: hidden;
   box-shadow: 2px 2px 2px lightgrey;
+  transition: 500ms height;
 }
 .article h2 {
   font-size: 28px;
@@ -63,15 +64,11 @@
   top: 10px;
   right: 10px;
 }
-.article .expandButton {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  font-size: 12px;
-  color: grey;
+.article i.fas.fa-chevron-circle-down {
+  font-size: 40px;
+  float: right;
   cursor: pointer;
-  transform: translate(-50%);
-  background-color: white;
+  padding: 15px 15px 0 0;
 }
 .article-open {
   height: 400px;

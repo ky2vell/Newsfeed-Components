@@ -154,19 +154,21 @@ function createArticleComponent(arg) {
   const thirdPara = document.createElement('p');
   thirdPara.textContent = arg.paraData3;
 
-  // Button
-  const artSpan = document.createElement('span');
-  artSpan.classList.add('expandButton');
-  artSpan.addEventListener('click', (e) => {
+  // Button icon
+  const icon = document.createElement('i');
+  icon.classList.add('fas');
+  icon.classList.add('fa-chevron-circle-down');
+  icon.addEventListener('click', (e) => {
     e.target.parentElement.classList.toggle('article-open');
+    icon.classList.toggle('fa-chevron-circle-up');
   });
 
+  art.appendChild(icon);
   art.appendChild(artHeading);
   art.appendChild(artDate);
   art.appendChild(firstPara);
   art.appendChild(secondPara);
   art.appendChild(thirdPara);
-  art.appendChild(artSpan);
 
   return art;
 }
