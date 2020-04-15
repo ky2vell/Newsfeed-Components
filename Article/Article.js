@@ -134,6 +134,9 @@ function createArticleComponent(arg) {
   // Article container
   const art = document.createElement('div');
   art.classList.add('article');
+  // Article container animation
+  art.style.transform = 'translate3d(-200%, 0, 0)';
+  art.style.animationFillMode = 'forwards';
 
   // Title of the article
   const artHeading = document.createElement('h2');
@@ -154,16 +157,24 @@ function createArticleComponent(arg) {
   const thirdPara = document.createElement('p');
   thirdPara.textContent = arg.paraData3;
 
-  // Button icon
-  const icon = document.createElement('i');
-  icon.classList.add('fas');
-  icon.classList.add('fa-chevron-circle-down');
-  icon.addEventListener('click', (e) => {
+  // Button icons
+  const iconArrow = document.createElement('i');
+  iconArrow.classList.add('fas');
+  iconArrow.classList.add('fa-chevron-circle-down');
+  iconArrow.addEventListener('click', (e) => {
     e.target.parentElement.classList.toggle('article-open');
-    icon.classList.toggle('fa-chevron-circle-up');
+    iconArrow.classList.toggle('fa-chevron-circle-up');
   });
 
-  art.appendChild(icon);
+  const iconCancel = document.createElement('i');
+  iconCancel.classList.add('fas');
+  iconCancel.classList.add('fa-times');
+  iconCancel.addEventListener('click', (e) => {
+    e.target.parentElement.remove();
+  });
+
+  art.appendChild(iconArrow);
+  art.appendChild(iconCancel);
   art.appendChild(artHeading);
   art.appendChild(artDate);
   art.appendChild(firstPara);
@@ -183,4 +194,13 @@ const artArray = data.map((item) => {
 
 artArray.forEach(newArt => {
   articles.appendChild(newArt);
+});
+
+
+// Article container animation
+const allArticleDivs = document.querySelectorAll('.article');
+
+allArticleDivs.forEach((el, index) => {
+  el.classList.add('fade-in');
+  el.style.animationDelay = `${index * 2}00ms`;
 });

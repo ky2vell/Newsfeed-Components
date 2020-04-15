@@ -50,6 +50,11 @@
   box-shadow: 2px 2px 2px lightgrey;
   transition: 500ms height;
 }
+@media (max-width: 767px) {
+  .article {
+    height: 110px;
+  }
+}
 .article h2 {
   font-size: 28px;
   padding: 0;
@@ -66,12 +71,42 @@
 }
 .article i.fas.fa-chevron-circle-down {
   font-size: 40px;
-  float: right;
+  float: left;
   cursor: pointer;
   padding: 15px 15px 0 0;
 }
+@media (max-width: 767px) {
+  .article i.fas.fa-chevron-circle-down {
+    display: block;
+    text-align: center;
+    float: none;
+  }
+}
+.article i.fas.fa-times {
+  float: right;
+  font-size: 40px;
+  cursor: pointer;
+  padding: 15px 15px 0 0;
+}
+@media (max-width: 767px) {
+  .article i.fas.fa-times {
+    display: none;
+  }
+}
 .article-open {
   height: 400px;
+}
+.fade-in {
+  animation: fadeIn ease 2s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 .menu-button {
   position: absolute;
