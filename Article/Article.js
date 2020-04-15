@@ -85,6 +85,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Cool Stuff in 2020',
+    date: 'Jan 1st, 2020',
+    firstParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum`,
+
+    secondParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum`,
+
+    thirdParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum`
+  },
+  {
+    title: 'Cooler Stuff in 2021',
+    date: 'Jan 1st, 2021',
+    firstParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum`,
+
+    secondParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum`,
+
+    thirdParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum`
   }
 ];
 
@@ -112,3 +130,77 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+function createArticleComponent(arg) {
+  // Article container
+  const art = document.createElement('div');
+  art.classList.add('article');
+  // Article container animation
+  art.style.transform = 'translate3d(-200%, 0, 0)';
+  art.style.animationFillMode = 'forwards';
+
+  // Title of the article
+  const artHeading = document.createElement('h2');
+  artHeading.textContent = arg.headingData;
+
+  // Date of the article
+  const artDate = document.createElement('p');
+  artDate.classList.add('date');
+  artDate.textContent = arg.dateData;
+
+  // Paragragh content
+  const firstPara = document.createElement('p');
+  firstPara.textContent = arg.paraData1;
+
+  const secondPara = document.createElement('p');
+  secondPara.textContent = arg.paraData2;
+
+  const thirdPara = document.createElement('p');
+  thirdPara.textContent = arg.paraData3;
+
+  // Button icons
+  const iconArrow = document.createElement('i');
+  iconArrow.classList.add('fas');
+  iconArrow.classList.add('fa-chevron-circle-down');
+  iconArrow.addEventListener('click', (e) => {
+    e.target.parentElement.classList.toggle('article-open');
+    iconArrow.classList.toggle('fa-chevron-circle-up');
+  });
+
+  const iconCancel = document.createElement('i');
+  iconCancel.classList.add('fas');
+  iconCancel.classList.add('fa-times');
+  iconCancel.addEventListener('click', (e) => {
+    e.target.parentElement.remove();
+  });
+
+  art.appendChild(iconArrow);
+  art.appendChild(iconCancel);
+  art.appendChild(artHeading);
+  art.appendChild(artDate);
+  art.appendChild(firstPara);
+  art.appendChild(secondPara);
+  art.appendChild(thirdPara);
+
+  return art;
+}
+
+const articles = document.querySelector('.articles');
+
+const artArray = data.map((item) => {
+  const artComponent = createArticleComponent({ headingData: item.title, dateData: item.date, paraData1: item.firstParagraph, paraData2: item.secondParagraph, paraData3: item.thirdParagraph });
+
+  return artComponent;
+});
+
+artArray.forEach(newArt => {
+  articles.appendChild(newArt);
+});
+
+
+// Article container animation
+const allArticleDivs = document.querySelectorAll('.article');
+
+allArticleDivs.forEach((el, index) => {
+  el.classList.add('fade-in');
+  el.style.animationDelay = `${index * 2}00ms`;
+});
